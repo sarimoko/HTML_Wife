@@ -32,21 +32,10 @@
             color: var(--text-main);
             font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
-            padding: 4rem 2rem;
+            padding: 4rem 1rem;
             display: flex;
             justify-content: center;
-            align-items: center;
-        }
-
-        /* Ambient subtle background glow */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(165, 180, 252, 0.05) 0%, transparent 70%);
-            top: -100px;
-            z-index: -1;
+            align-items: flex-start; /* Better scrolling for long forms */
         }
 
         .portal-wrapper {
@@ -59,9 +48,10 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            margin-bottom: 4rem;
         }
 
-        /* Job Posting Header styling */
+        /* Job Posting Header */
         .header {
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 2rem;
@@ -113,44 +103,44 @@
             font-size: 1.1rem;
             font-weight: 600;
             color: #ffffff;
-            margin: 2rem 0 1.25rem 0;
+            margin: 2.5rem 0 1.5rem 0;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            padding-bottom: 0.5rem;
         }
 
         .section-title i {
-            font-size: 0.95rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #818cf8;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
+            display: block; /* Force layout separation */
         }
 
         .form-group label {
             display: block;
             font-size: 0.9rem;
             font-weight: 500;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             color: var(--text-main);
         }
 
         .form-group input[type="text"],
-        .form-group input[type="email"],
         .form-group select,
         .form-group textarea {
             width: 100%;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 0.85rem 1rem;
             color: #ffffff;
             font-family: inherit;
             font-size: 0.95rem;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: border-color 0.2s ease;
+            display: block;
         }
 
         .form-group input:focus,
@@ -158,65 +148,47 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
         }
 
-        /* Custom Options Grid */
+        /* Layout Grid for Columns */
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+            gap: 1.25rem;
         }
 
-        @media(max-width: 500px) {
+        @media(max-width: 550px) {
             .options-grid { grid-template-columns: 1fr; }
+            .portal-wrapper { padding: 1.5rem; }
         }
 
-        .radio-box, .checkbox-box {
-            display: block;
-            position: relative;
+        /* Native-Aligned Selection Inputs to Prevent Collapsing */
+        .selection-control {
+            display: flex;
+            align-items: center;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-color);
             border-radius: 10px;
-            padding: 0.85rem 1rem 0.85rem 2.5rem;
+            padding: 0.85rem 1rem;
             cursor: pointer;
             font-size: 0.9rem;
-            user-select: none;
-            transition: background 0.2s ease;
+            gap: 0.75rem;
+            transition: background 0.2s ease, border-color 0.2s ease;
         }
 
-        .radio-box:hover, .checkbox-box:hover {
+        .selection-control:hover {
             background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(99, 102, 241, 0.2);
         }
 
-        .radio-box input, .checkbox-box input {
-            position: absolute;
-            opacity: 0;
+        .selection-control input {
+            accent-color: var(--accent-color);
+            width: 16px;
+            height: 16px;
             cursor: pointer;
         }
 
-        /* Checkmark vectors */
-        .checkmark {
-            position: absolute;
-            top: 50%;
-            left: 1rem;
-            transform: translateY(-50%);
-            height: 16px;
-            width: 16px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
-
-        .radio-box .checkmark { border-radius: 50%; }
-
-        .radio-box input:checked ~ .checkmark,
-        .checkbox-box input:checked ~ .checkmark {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        /* Form Actions button */
+        /* Form Actions Button */
         .submit-btn {
             width: 100%;
             background: var(--text-main);
@@ -227,7 +199,7 @@
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             font-family: inherit;
             display: flex;
             justify-content: center;
@@ -282,7 +254,7 @@
                     <select id="hobbies" name="Gaming Protocol" required>
                         <option value="high">Encourages it / Brings snacks</option>
                         <option value="medium">Quietly co-exists with headphones</option>
-                        <option value="low">Heavy eye-rolls (Requires performance review)</option>
+                        <option value="low">Heavy eye-rolls (Performance review required)</option>
                     </select>
                 </div>
             </div>
@@ -292,13 +264,13 @@
             <div class="form-group">
                 <label>Where should we eat tonight?</label>
                 <div class="options-grid">
-                    <label class="radio-box">"I don't care, you pick."
+                    <label class="selection-control">
                         <input type="radio" name="Dinner Conflict Logic" value="Indecisive standard" required>
-                        <span class="checkmark"></span>
+                        <span>"I don't care, you pick."</span>
                     </label>
-                    <label class="radio-box">An actual operational suggestion
+                    <label class="selection-control">
                         <input type="radio" name="Dinner Conflict Logic" value="Constructive asset">
-                        <span class="checkmark"></span>
+                        <span>An actual food suggestion</span>
                     </label>
                 </div>
             </div>
@@ -306,13 +278,13 @@
             <div class="form-group">
                 <label>Spontaneous Delivery Package Protocol:</label>
                 <div class="options-grid">
-                    <label class="checkbox-box">I accept unannounced tech gear
+                    <label class="selection-control">
                         <input type="checkbox" name="Package Acceptance Core" value="Tech Approved">
-                        <span class="checkmark"></span>
+                        <span>I accept unannounced tech gear</span>
                     </label>
-                    <label class="checkbox-box">I maintain Amazon package amnesty
+                    <label class="selection-control">
                         <input type="checkbox" name="Package Acceptance Core" value="Mutual Amnesty Allowed">
-                        <span class="checkmark"></span>
+                        <span>I maintain package amnesty</span>
                     </label>
                 </div>
             </div>
